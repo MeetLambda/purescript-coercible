@@ -1,11 +1,16 @@
 module Test.Main where
 
-import Prelude
-import Control.Monad.Eff (Eff)
-import Control.Monad.Eff.Console (CONSOLE, logShow)
-
-import Data.List ((:), List(Nil))
+import Control.Bind (discard)
 import Control.Coercible (class Coercible, coerce)
+import Data.Function (($))
+import Data.List ((:), List(Nil))
+import Data.Semigroup ((<>))
+import Data.Semiring ((+))
+import Data.Show (class Show, show)
+import Data.Unit (Unit)
+import Effect (Effect)
+import Effect.Class.Console (logShow)
+
 
 data N = Z | S N
 
@@ -20,7 +25,7 @@ instance coerceNInt :: Coercible N Int where
 instance coerceNString :: Coercible N String where
   coerce = show
 
-main :: forall e. Eff (console :: CONSOLE | e) Unit
+main :: Effect Unit
 main = do
   let three = S (S (S Z))
   logShow $ coerce three :: String
