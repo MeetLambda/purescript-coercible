@@ -63,9 +63,9 @@ instance coercibleStringListChar :: Coercible String (List Char) where
       case uncons str of
            Just { head, tail } -> coerce' (head : acc) str
            _ -> acc
-else
-instance coercibleId :: Coercible a a where
-  coerce = identity
+-- else
+-- instance coercibleId :: Coercible a a where
+--   coerce = identity
 
 fromChar :: Char -> String
 fromChar c = fromCharArray [c]
